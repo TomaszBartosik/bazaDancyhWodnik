@@ -10,15 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private static final String TAG = "UserAdapter";
 
 
-    ArrayList<String> users;
+    List<User> users;
 
-    public UserAdapter(ArrayList<String> users) {
+    public UserAdapter(List<User> users) {
         this.users = users;
     }
 
@@ -31,7 +32,8 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
-        holder.input_Data.setText(users.get(position));
+        holder.input_Data.setText(users.get(position).getData());
+        holder.input_Hour.setText(users.get(position).getHour());
     }
 
     @Override
@@ -43,9 +45,12 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {   // odpowiada za pojedynczy rekord
         public TextView input_Data;
+        public TextView input_Hour;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             input_Data = itemView.findViewById(R.id.input_Data);
+            input_Hour = itemView.findViewById(R.id.input_Hour);
         }
     }
 }
