@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,5 +56,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,createUser.class);
         startActivity(intent);
 
+    }
+
+    public void show_info(View view) {
+
+        Toast.makeText(getApplicationContext(),"ssssssss",Toast.LENGTH_LONG).show();
     }
 }

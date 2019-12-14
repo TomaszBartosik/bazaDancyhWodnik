@@ -17,7 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 
 public class createUser extends AppCompatActivity {
@@ -62,6 +64,8 @@ public class createUser extends AppCompatActivity {
 
     }
 
+
+
     public void datePicker(View view) {
         Calendar calendar = Calendar.getInstance();
         final int Year = calendar.get(Calendar.YEAR);
@@ -69,12 +73,17 @@ public class createUser extends AppCompatActivity {
         final int Day = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                //inputData.setText(Year+" "+Month+""+Day);
-                date= Year+"/"+Month+"/"+Day;
-                inputData.setText(date);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String datea = sdf.format(new Date());
+
+
+                date= year+"/"+(month+1)+"/"+dayOfMonth;
+                inputData.setText(datea);
             }
         },Year,Month,Day);
         datePickerDialog.show();
@@ -84,13 +93,20 @@ public class createUser extends AppCompatActivity {
 
     public void timePicker(View view) {
         Calendar time = Calendar.getInstance();
-        final int Hour= time.get(Calendar.HOUR_OF_DAY);
+        final int Hour= time.get(Calendar.HOUR);
         final int Minute=time.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            hour = Hour+":"+Minute;
+             if(Minute<10){
+                 hour = hourOfDay+":0"+minute;
+             }
+
+             else {
+                 hour = hourOfDay+":"+minute;
+             }
+
             inputHour.setText(hour);
             }
         },Hour, Minute,true);
